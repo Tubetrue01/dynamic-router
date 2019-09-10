@@ -1,0 +1,54 @@
+.productGroup {
+  .top-search {
+    .search-list {
+      text-align: right;
+      padding-right: 70px;
+
+      & > div {
+        display: inline-block;
+      }
+
+      span {
+        color: #999999;
+        font-size: 14px;
+      }
+
+      .time {
+        margin-left: 50px;
+      }
+
+      .search-btn {
+        margin-left: 100px;
+
+        .el-button.el-button--primary {
+          width: 84px;
+          height: 32px;
+          line-height: 22px;
+          background: linear-gradient(90deg, rgba(6, 205, 174, 1) 0%, rgba(32, 222, 173, 1) 100%);
+          border-radius: 16px;
+          border: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.product-list {
+  .el-button--text {
+    color: #1BDBAD;
+  }
+}
+
+.addBtn {
+  margin: 20px 0 38px;
+
+  .el-button.el-button--primary {
+    width: 140px;
+    height: 32px;
+    background: linear-gradient(90deg, rgba(6, 205, 174, 1) 0%, rgba(32, 222, 173, 1) 100%);
+    border-radius: 16px;
+    border: 0;
+    padding: 0;
+  }
+}
