@@ -11,17 +11,15 @@ const user = {
   },
   actions: {
     xLogin ({ commit }, data) {
-      return new Promise((resolve, reject) => {
+      return sLogin(data).then(re => {
         // 处理数据，将user信息保存到vuex
-        sLogin(data).then(re => {
-          if (re.code === StatusCode.Success) {
-            commit('save', re.code)
-            resolve(re)
-          } else {
-            // eslint-disable-next-line prefer-promise-reject-errors
-            reject()
-          }
-        })
+        if (re.code === StatusCode.Success) {
+          commit('save', re.code)
+          return transfer(re)
+        } else {
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject()
+        }
       }).catch(err => {
         throw err
       })

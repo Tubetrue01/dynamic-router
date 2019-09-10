@@ -22,19 +22,27 @@ function removeToken () {
   return Cookies.remove(YJ_TOKEN)
 }
 
-// Get all the buttons in this page by specified privileges
+/*
+ * Get all the buttons in this page by specified privileges
+ */
 function getButtonsOfPage () {
+  // Get route info from the storage
   const routeInfo = getRouterInfoFromStorage()
-  if (routeInfo) {
-    const currentPermission = routeInfo.filter(item => {
-      return item.meta.title === this.$route.meta.pname
-    })
-    if (currentPermission[0].length !== 0) {
-      const second = currentPermission[0].children.filter(item => {
-        return item.meta.title === this.$route.name
-      })
-      if (second[0].length !== 0) {
-        this.allButton = second[0].children
+  // Get all the buttons from the route
+  this.allButton = getRouteButtons(routeInfo, this.$route.name)
+
+  /**
+   *
+   * @param routeInfo The route info you need to process
+   * @param name The path's name you need to fetch
+   * @return Buttons of the route
+   */
+  function getRouteButtons (routeInfo, name) {
+    for (let i = 0; i < routeInfo.length; i++) {
+      if (routeInfo[i].name === name) {
+        return routeInfo[i].children === null ? null : routeInfo[i].children
+      } else if (routeInfo[i].children != null) {
+        return getRouteButtons(routeInfo[i].children, name)
       }
     }
   }
@@ -63,7 +71,7 @@ function clearStorage () {
  */
 function sleep (time) {
   const end = new Date().getTime() + time
-  while (true) {
+  for (; ;) {
     if (new Date().getTime() >= end) {
       break
     }
@@ -85,6 +93,12 @@ function convert (apiFn, ...data) {
     })
   })
 }
+
+/* Packing result to promise */
+function transfer (result) {
+  return Promise.resolve(result)
+}
+
 
 export {
   getButtonsOfPage,

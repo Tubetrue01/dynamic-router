@@ -216,7 +216,7 @@
     mounted () {
       // 获取按钮权限
       this.getButtonsOfPage()
-      this.test()
+      // this.test()
     },
 
     methods: {
